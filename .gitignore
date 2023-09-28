@@ -1,0 +1,8 @@
+.vscode/
+desktop.ini
+test*.*
+*.js.bak
+junk.js.txt
+junk.lua.txt
+sound.unused/*.*
+*.keystore

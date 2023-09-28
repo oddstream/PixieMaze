@@ -1,0 +1,54 @@
+-- Random.lua
+
+--[[
+  Creates a pseudo-random value generator. The seed must be an integer.
+
+  Uses an optimized version of the Park-Miller PRNG.
+  http://www.firstpr.com.au/dsp/rand31/
+  https://gist.github.com/blixt/f17b47c62508be59987b
+]]
+
+local Random = {
+  -- prototype object
+  seed_ = nil
+}
+
+function Random:new(seed)
+  local o = {}
+  self.__index = self
+  setmetatable(o, self)
+
+  seed = seed or os.time()
+  o.seed_ = seed % 2147483647
+  if o.seed_ <= 0 then
+    o.seed_ = o.seed_ + 2147483646
+  end
+
+  return o
+end
+
+--[[
+  Returns a pseudo-random value between 1 and 2^32 - 2.
+]]
+function Random:next()
+  self.seed_ = self.seed_ * 16807 % 2147483647
+  return self.seed_
+end
+
+--[[
+  Returns a pseudo-random floating point number in range [0, 1].
+]]
+function Random:nextFloat()
+  -- We know that result of next() will be 1 to 2147483646 (inclusive).
+  return (self:next() - 1) / 2147483646
+end
+
+--[[
+  Returns a random integer between min (inclusive) and max (inclusive)
+  Using math.round() will give you a non-uniform distribution!
+]]
+function Random:nextInt(min, max)
+  return math.floor(self:nextFloat() * (max - min + 1)) + min
+end
+
+return Random

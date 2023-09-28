@@ -1,0 +1,25 @@
+settings = 
+{
+  window =
+  {
+    defaultMode = 'normal',
+    defaultViewWidth = 480,
+    defaultViewHeight = 640,
+    resizable = true,
+    minViewWidth = 480,
+    minViewHeight = 640,
+    enableCloseButton = true,
+    enableMinimizeButton = true,
+    suspendWhenMinimized = true,
+    titleText =
+    {
+      default = 'PIXIE·MAZE'
+    }
+  },
+  excludeFiles =
+  {
+    all = {'.git','.gitignore','*.txt','*.pdn','Icon256.*','PlayStoreAssets/*','pixiemaze.keystore','README.md','Unused/*'},
+    android = {'*.ico'},
+    win32 = {'Icon-*.png'}
+  }
+}
